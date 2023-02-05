@@ -112,7 +112,7 @@ export default function Games(): ReactElement {
 	}
 
 	return (
-		<div className='m-2 flex min-h-screen flex-col gap-2 md:m-0'>
+		<div className='flex min-h-screen flex-col gap-2 md:m-0'>
 			<Hero dispatch={dispatch} />
 			<Container>
 				<div className='mt-[4rem] mb-[2.0625rem] flex w-full items-center justify-between'>
