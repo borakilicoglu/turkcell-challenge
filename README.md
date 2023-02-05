@@ -1,11 +1,15 @@
-# Turkcell Frontend Chanllenge
+# Turkcell Frontend Challenge
 
 ## Steps
 
--- npm install
+### Install the packages
 
--- json-server --watch db.json
+pnpm install
 
--- mpm run dev
+### Start the server
 
--- YAY!
+json-server --watch db.json
+
+### Start the app
+
+npm run dev
