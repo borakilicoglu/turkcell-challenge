@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import getCategories from 'api/getCategories'
 import getGames from 'api/getGames'
 import { Container, Hero, LoadingOrError } from 'components'
 import { ReactElement, useEffect, useReducer } from 'react'
@@ -49,7 +50,13 @@ function reducer(state: IState, action: IAction) {
 }
 
 export default function Games(): ReactElement {
-	const { isLoading, isError, error, data } = useQuery(['games'], getGames)
+	const {
+		isLoading,
+		isError,
+		error,
+		data: gamesData
+	} = useQuery(['games'], getGames)
+	const { data: categoriesData } = useQuery(['categories'], getCategories)
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	const arrangeGames = (games: Array<IGame>) => {
@@ -80,31 +87,25 @@ export default function Games(): ReactElement {
 		})
 	}
 
-	function setCategories(data: Array<any>) {
-		let categories: Array<string> = []
-		data.map((game: IGame) =>
-			game.genre.map((item: string) =>
-				!categories.includes(item) ? (categories = [...categories, item]) : null
-			)
-		)
+	function setCategories(data: Array<string>) {
 		return dispatch({
 			type: Actions.SETCATEGORIES,
-			payload: categories
+			payload: data
 		})
 	}
 
 	useEffect(() => {
-		if (data?.length) {
-			setGames(data)
+		if (gamesData?.length) {
+			setGames(gamesData)
 		}
 	}, [state.searchInput, state.selectedCategories, state.sortDirection])
 
 	useEffect(() => {
-		if (data?.length) {
-			setCategories(data)
-			setGames(data)
+		if (gamesData?.length && categoriesData?.length) {
+			setCategories(categoriesData)
+			setGames(gamesData)
 		}
-	}, [data])
+	}, [gamesData, categoriesData])
 
 	if (isLoading || isError) {
 		return <LoadingOrError error={error as Error} />
@@ -118,9 +119,9 @@ export default function Games(): ReactElement {
 					<h2 className='text-[1.75rem] font-bold'>Browse Games</h2>
 					<Game.Sort dispatch={dispatch} />
 				</div>
-				<div className='flex gap-x-[1.25rem]'>
+				<div className='flex flex-col gap-x-[1.25rem] lg:flex-row'>
 					<Game.Categories state={state} dispatch={dispatch} />
-					<Game.List games={state.games} />
+					<Game.List state={state} />
 				</div>
 			</Container>
 		</div>

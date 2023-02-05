@@ -3,14 +3,14 @@ import { Actions } from 'types'
 
 export function Hero({ dispatch }: any): ReactElement {
 	return (
-		<div className='flex h-[25rem] flex-col items-center justify-center bg-[url("/images/hero.jpg")]'>
+		<div className='flex min-h-[25rem] flex-col items-center justify-center bg-[url("/images/hero.jpg")]'>
 			<h2 className='text-center text-[2.5rem] font-semibold text-white'>
 				Find the game that you want to play and <br /> start playing wherever
 				you want!
 			</h2>
 			<p className='mt-[0.9375rem] w-[60%] text-center text-[1.25rem] leading-[1.3] text-white'>
-				With the Cloud Gaming, you can join, play, and share games online with
-				anyone in the world. <br /> Play any game on any device!
+				With the Cloud Gaming, you can join, play <br /> and share games online
+				with anyone in the world. <br /> Play any game on any device!
 			</p>
 			<div className='relative mt-[3.0625rem] flex w-[60%] items-center'>
 				<svg

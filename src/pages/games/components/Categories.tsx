@@ -26,7 +26,7 @@ export function Categories({ dispatch, state }: any) {
 	}
 
 	return (
-		<div className='basis-[30%]'>
+		<div className='mb-[1.25rem] basis-[100%] lg:basis-[30%]'>
 			<div className='flex flex-col bg-[#1e1e1e] px-[1.875rem] py-[2.5rem]'>
 				<h2 className='mb-[1.875rem] text-[1.5rem] font-semibold text-[#afafaf]'>
 					Genre Filters

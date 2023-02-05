@@ -22,6 +22,7 @@ export function Sort({ dispatch }: any) {
 	const [isOpen, toggleOpen] = useState(false)
 
 	function handleSort(direction: string) {
+		toggleOpen(false)
 		return dispatch({
 			type: Actions.TOGGLESORT,
 			payload: direction
